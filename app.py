@@ -51,12 +51,6 @@ def documentation():
 
 @app.route('/predict/<int:c_id>', methods=["GET"])
 def predict_proba(c_id):
-    # the id should not be include in the x
-    # and the code could be like that
-    # id = int(ID_client)
-    # data = data.set_index("SK_ID_CURR") # this should be done where you load your dataframe so it is done only once and not every single time you call predict_proba
-    # x = data.loc[id] # here the id in not in x valuesn but only as index
-    # y_proba = model.predict_proba(x)[0]
     X = data[data['SK_ID_CURR'] == c_id]
     # check if the the id exist in the dataframe
     if X.shape[0] == 1:
@@ -81,7 +75,6 @@ def predict_proba(c_id):
 @app.route('/myid/<myid>')
 def myid(myid):
     return myid
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
